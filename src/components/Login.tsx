@@ -20,6 +20,9 @@ const Login = () => {
         },
         validationSchema: LoginSchema
     });
+    // notes
+    // - formik.touched.email is used to check if the user has touched the email field or not, if the user has touched the email field and there is an error in the email field, it will show the error message, otherwise it will show null
+    //  - when the user submit all totuched fields will be true and if there is an error in any field it will show the error message for that field
     return (
         <section className='m-5'>
             <h1>Login</h1>
@@ -37,7 +40,7 @@ const Login = () => {
                                 value={formaik.values.email}
                             />
                         </Form.Group>
-                        <div>{formaik.errors.email}</div>
+                        <div className='text-danger m-1'>{formaik.touched.email && formaik.errors.email ? formaik.errors.email : null}</div>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
@@ -48,7 +51,7 @@ const Login = () => {
                                 value={formaik.values.password}
                             />
                         </Form.Group>
-                        <div>{formaik.errors.password}</div>
+                        <div className='text-danger m-1'>{formaik.touched.password && formaik.errors.password ? formaik.errors.password : null}</div>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
