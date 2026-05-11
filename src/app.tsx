@@ -1,11 +1,13 @@
 import './app.css'
 import Login from './components/Login'
+import Register from './components/Register'
 
 export function App() {
 
   return (
-    <body>
+    <div>
+      {/* <Register /> */}
       <Login />
-    </body>
+    </div>
   )
 }
