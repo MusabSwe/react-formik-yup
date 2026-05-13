@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Row, Col, Form, Button } from 'react-bootstrap';
+import { useEffect } from 'react';
 
 const LoginSchema = Yup.object().shape({
     email: Yup.string().email("Enter a valid email address").required('Email is required'),
@@ -19,6 +20,9 @@ const Login = () => {
             email: '',
             password: ''
         },
+        // validate: (values) => {
+        //     console.log('values::: ', values);
+        // }, // invoked when the user changes the value of the input field or when the user clicks outside the input field, useful when you want to validate the form without using a validation schema, you can use this function to validate the form and show the error messages if there are any
         validateOnBlur: true, // when the user clicks outside the input field it will validate the form and show the error messages if there are any
         validateOnChange: true, // when the user changes the value of the input field it will validate the form and show the error messages if there are any
         // validateOnMount: true, // when the component is mounted it will validate the form and show the error messages if there are any
@@ -27,6 +31,15 @@ const Login = () => {
         },
         validationSchema: LoginSchema
     });
+
+    // useful for debugging purposes to see the formik object and its properties, you can see the values, errors, touched, isValid, isSubmitting, etc. properties of the formik object
+    // and also if you want to navigate or check custom error messages or custom validation you can use this useEffect to see the formik object and its properties
+    // useEffect(() => {
+    //     console.log('form ::: ', formaik);
+    //     if(Object.keys(formaik.errors).length > 0){
+    //         console.log('form is not valid');
+    //     }
+    // }, [formaik])
     // notes
     // - formik.touched.email is used to check if the user has touched the email field or not, if the user has touched the email field and there is an error in the email field, it will show the error message, otherwise it will show null
     //  - when the user submit all totuched fields will be true and if there is an error in any field it will show the error message for that field
@@ -50,7 +63,7 @@ const Login = () => {
                         </Form.Group>
                         <div className='text-danger m-1'>
                             {
-                             formaik.touched.email && formaik.errors.email ?
+                                formaik.touched.email && formaik.errors.email ?
                                     formaik.errors.email : null
                             }
                         </div>
@@ -67,7 +80,7 @@ const Login = () => {
                         </Form.Group>
                         <div className='text-danger m-1'>
                             {
-                                 formaik.touched.password && formaik.errors.password ?
+                                formaik.touched.password && formaik.errors.password ?
                                     formaik.errors.password : null
                             }
                         </div>
