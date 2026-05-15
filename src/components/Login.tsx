@@ -32,6 +32,7 @@ const Login = () => {
         validationSchema: LoginSchema
     });
 
+    // Formik is a controlled form library, it means that the form data is handled by the state of the component, and the formik object is used to handle the form data and the form state, it has many properties and methods that you can use to handle the form data and the form state, such as values, errors, touched, isValid, isSubmitting, handleChange, handleBlur, handleSubmit, etc.
     // useful for debugging purposes to see the formik object and its properties, you can see the values, errors, touched, isValid, isSubmitting, etc. properties of the formik object
     // and also if you want to navigate or check custom error messages or custom validation you can use this useEffect to see the formik object and its properties
     // useEffect(() => {
