@@ -11,15 +11,17 @@ const LoginSchema = Yup.object().shape({
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character')
 });
 
+// let incomingEmail = 'musab@gmail.com';
 const Login = () => {
     //  There 2 types of form controlled and uncontrolled
     // 1- controlled form: the form data is handled by the state of the component
     // 2- uncontrolled form: the form data is handled by the DOM itself, by ref
     const formaik = useFormik({
         initialValues: {
-            email: '',
+            email: '',  // incomingEmail ?? '',
             password: ''
         },
+        enableReinitialize: true, // when the initialValues change it will reinitialize the form with the new initialValues, useful when you want to reset the form after submit or when you want to edit the form and you want to fill the form with the data of the item that you want to edit
         // validate: (values) => {
         //     console.log('values::: ', values);
         // }, // invoked when the user changes the value of the input field or when the user clicks outside the input field, useful when you want to validate the form without using a validation schema, you can use this function to validate the form and show the error messages if there are any
@@ -32,6 +34,10 @@ const Login = () => {
         validationSchema: LoginSchema
     });
 
+    useEffect(() => {
+        if(formaik.values.email) return;
+        formaik.setFieldValue('email', 'musab@gmail.com');
+    }, [formaik])
     // Formik is a controlled form library, it means that the form data is handled by the state of the component, and the formik object is used to handle the form data and the form state, it has many properties and methods that you can use to handle the form data and the form state, such as values, errors, touched, isValid, isSubmitting, handleChange, handleBlur, handleSubmit, etc.
     // useful for debugging purposes to see the formik object and its properties, you can see the values, errors, touched, isValid, isSubmitting, etc. properties of the formik object
     // and also if you want to navigate or check custom error messages or custom validation you can use this useEffect to see the formik object and its properties
