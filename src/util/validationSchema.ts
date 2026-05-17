@@ -14,3 +14,11 @@ export const LoginSchema = Yup.object().shape({
         .required('Password is required')
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character')
 });
+
+export const RegisterSchema = Yup.object().concat(LoginSchema).shape({
+    fname: Yup.string().required('First name is required'),
+    lname: Yup.string().required('Last name is required'),
+    confirmPassword: Yup.string()
+        .oneOf([Yup.ref('password')], 'Passwords must match')
+        .required('Confirm password is required'),
+});

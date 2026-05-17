@@ -6,7 +6,7 @@ export function App() {
 
   return (
     <div>
-      {/* <Register /> */}
+      <Register />
       <Login />
     </div>
   )
