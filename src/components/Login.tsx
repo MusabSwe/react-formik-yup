@@ -91,14 +91,12 @@ const Login = () => {
                                 onBlur={formaik.handleBlur}
                                 name='email'
                                 value={formaik.values.email}
+                                isInvalid={!!(formaik.touched.email && formaik.errors.email)}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {formaik.errors.email}
+                            </Form.Control.Feedback>
                         </Form.Group>
-                        <div className='text-danger m-1'>
-                            {
-                                formaik.touched.email && formaik.errors.email ?
-                                    formaik.errors.email : null
-                            }
-                        </div>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
@@ -108,14 +106,12 @@ const Login = () => {
                                 onBlur={formaik.handleBlur}
                                 name='password'
                                 value={formaik.values.password}
+                                isInvalid={!!(formaik.touched.password && formaik.errors.password)}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {formaik.errors.password}
+                            </Form.Control.Feedback>
                         </Form.Group>
-                        <div className='text-danger m-1'>
-                            {
-                                formaik.touched.password && formaik.errors.password ?
-                                    formaik.errors.password : null
-                            }
-                        </div>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
