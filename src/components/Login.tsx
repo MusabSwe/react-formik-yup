@@ -3,8 +3,15 @@ import * as Yup from 'yup';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { useEffect } from 'react';
 
+const emails = ['musab@gmail.com', 'john@gmail.com', 'jane@gmail.com'];
 const LoginSchema = Yup.object().shape({
-    email: Yup.string().email("Enter a valid email address").required('Email is required'),
+    email: Yup.string()
+    .email("Enter a valid email address")
+    .required('Email is required')
+    .test('checkEmailExists', 'Email is already in use', function(value,context) {
+        console.log('value::: ', value, 'context::: ', context);
+        return !emails.includes(value);
+    }),
     password: Yup.string()
         .min(8, 'Password must be at least 8 characters')
         .required('Password is required')
@@ -12,7 +19,6 @@ const LoginSchema = Yup.object().shape({
 });
 
 // let incomingEmail = 'musab@gmail.com';
-const emails = ['musab@gmail.com', 'john@gmail.com', 'jane@gmail.com'];
 const Login = () => {
     //  There 2 types of form controlled and uncontrolled
     // 1- controlled form: the form data is handled by the state of the component
@@ -22,7 +28,7 @@ const Login = () => {
             email: '',  // incomingEmail ?? '',
             password: ''
         },
-        enableReinitialize: true, // when the initialValues change it will reinitialize the form with the new initialValues, useful when you want to reset the form after submit or when you want to edit the form and you want to fill the form with the data of the item that you want to edit
+        // enableReinitialize: true, // when the initialValues change it will reinitialize the form with the new initialValues, useful when you want to reset the form after submit or when you want to edit the form and you want to fill the form with the data of the item that you want to edit
         // validate: (values) => {
         //     console.log('values::: ', values);
         // }, // invoked when the user changes the value of the input field or when the user clicks outside the input field, useful when you want to validate the form without using a validation schema, you can use this function to validate the form and show the error messages if there are any
@@ -30,21 +36,22 @@ const Login = () => {
         validateOnChange: true, // when the user changes the value of the input field it will validate the form and show the error messages if there are any
         // validateOnMount: true, // when the component is mounted it will validate the form and show the error messages if there are any
         onSubmit: (values, formikHelper) => {
-            if (emails.includes(values.email)) {
-                formikHelper.setErrors({ email: 'Email is already in use' });
-                console.log('form is already exists');
-                return;
-            }
+            // method 1 to check if the email is already in use without using the validation schema, you can use the formikHelper.setErrors to set the error message for the email field if the email is already in use, and then return from the onSubmit function to prevent the form from being submitted
+            // if (emails.includes(values.email)) {
+            //     formikHelper.setErrors({ email: 'Email is already in use' });
+            //     console.log('form is already exists');
+            //     return;
+            // }
             alert(JSON.stringify(values, null, 2));
         },
         validationSchema: LoginSchema
     });
 
     // formki.setFieldValue used to set the value of a specific field in the form, it takes two arguments, the first one is the name of the field and the second one is the value that you want to set for that field, useful when you want to set the value of a specific field in the form, for example when you want to fill the form with the data of the item that you want to edit
-    useEffect(() => {
-        if (formaik.values.email) return;
-        formaik.setFieldValue('email', 'musab@gmail.com');
-    }, [formaik])
+    // useEffect(() => {
+    //     if (formaik.values.email) return;
+    //     formaik.setFieldValue('email', 'musab@gmail.com');
+    // }, [formaik])
 
     // Formik is a controlled form library, it means that the form data is handled by the state of the component, and the formik object is used to handle the form data and the form state, it has many properties and methods that you can use to handle the form data and the form state, such as values, errors, touched, isValid, isSubmitting, handleChange, handleBlur, handleSubmit, etc.
     // useful for debugging purposes to see the formik object and its properties, you can see the values, errors, touched, isValid, isSubmitting, etc. properties of the formik object
