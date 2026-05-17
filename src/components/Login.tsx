@@ -1,17 +1,17 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Row, Col, Form, Button } from 'react-bootstrap';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 const emails = ['musab@gmail.com', 'john@gmail.com', 'jane@gmail.com'];
 const LoginSchema = Yup.object().shape({
     email: Yup.string()
-    .email("Enter a valid email address")
-    .required('Email is required')
-    .test('checkEmailExists', 'Email is already in use', function(value,context) {
-        console.log('value::: ', value, 'context::: ', context);
-        return !emails.includes(value);
-    }),
+        .email("Enter a valid email address")
+        .required('Email is required')
+        .test('checkEmailExists', 'Email is already in use', function (value, context) {
+            console.log('value::: ', value, 'context::: ', context);
+            return !emails.includes(value);
+        }),
     password: Yup.string()
         .min(8, 'Password must be at least 8 characters')
         .required('Password is required')
@@ -65,6 +65,16 @@ const Login = () => {
     // notes
     // - formik.touched.email is used to check if the user has touched the email field or not, if the user has touched the email field and there is an error in the email field, it will show the error message, otherwise it will show null
     //  - when the user submit all totuched fields will be true and if there is an error in any field it will show the error message for that field
+
+    // custom input handler to handle the change of the input field, you can use
+    //  this function to handle the change of the input field and do some
+    //  custom logic before calling the formik.handleChange function
+    const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.name === 'email') {
+            console.log('Call email API');
+        }
+        formaik.setFieldValue(e.target.name, e.target.value);
+    }
     return (
         <section className='m-5'>
             <h1>Login</h1>
@@ -77,7 +87,7 @@ const Login = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter email"
-                                onChange={formaik.handleChange}
+                                onChange={inputHandler}
                                 onBlur={formaik.handleBlur}
                                 name='email'
                                 value={formaik.values.email}
@@ -94,7 +104,7 @@ const Login = () => {
                             <Form.Control
                                 type="password"
                                 placeholder="Password"
-                                onChange={formaik.handleChange}
+                                onChange={inputHandler}
                                 onBlur={formaik.handleBlur}
                                 name='password'
                                 value={formaik.values.password}
