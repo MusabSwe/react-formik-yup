@@ -81,9 +81,9 @@ const Login = () => {
                                 {formaik.errors.email}
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <div>
+                        {/* <div>
                             <input type="password" className='d-none' name='hidden-password' />
-                        </div>
+                        </div> */}
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control

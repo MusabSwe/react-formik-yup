@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
 
 const emails = ['musab@gmail.com', 'john@gmail.com', 'jane@gmail.com'];
+const getCharacterValidationError = (type: string) => {
+    return `Password must contain at least one ${type}`;
+}
 export const LoginSchema = Yup.object().shape({
     email: Yup.string()
         .email("Enter a valid email address")
@@ -12,7 +15,10 @@ export const LoginSchema = Yup.object().shape({
     password: Yup.string()
         .min(8, 'Password must be at least 8 characters')
         .required('Password is required')
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character')
+        .matches(/[0-9]/, getCharacterValidationError('digit'))
+        .matches(/[a-z]/, getCharacterValidationError('lowercase letter'))
+        .matches(/[A-Z]/, getCharacterValidationError('uppercase letter'))
+        .matches(/[@$!%*?&]/, getCharacterValidationError('special character')),
 });
 
 export const RegisterSchema = Yup.object().concat(LoginSchema).shape({
@@ -20,5 +26,5 @@ export const RegisterSchema = Yup.object().concat(LoginSchema).shape({
     lname: Yup.string().required('Last name is required'),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password')], 'Passwords must match')
-        .required('Confirm password is required'),
+        .required('Please retype your password'),
 });
