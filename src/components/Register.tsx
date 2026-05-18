@@ -35,6 +35,7 @@ const Register = () => {
                                 onBlur={formaik.handleBlur}
                                 onChange={formaik.handleChange}
                                 isInvalid={!!(formaik.touched.fname && formaik.errors.fname)}
+                                autoComplete='off'
                             />
                             <Form.Control.Feedback type="invalid">
                                 {formaik.errors.fname}
@@ -51,6 +52,7 @@ const Register = () => {
                                 onBlur={formaik.handleBlur}
                                 onChange={formaik.handleChange}
                                 isInvalid={!!(formaik.touched.lname && formaik.errors.lname)}
+                                autoComplete='off'
                             />
                             <Form.Control.Feedback type="invalid">
                                 {formaik.errors.lname}
@@ -67,7 +69,8 @@ const Register = () => {
                                 value={formaik.values.email}
                                 onChange={formaik.handleChange}
                                 isInvalid={!!(formaik.touched.email && formaik.errors.email)}
-                            />
+                                autoComplete='off'
+                           />
                             <Form.Control.Feedback type="invalid">
                                 {formaik.errors.email}
                             </Form.Control.Feedback>
