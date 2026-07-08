@@ -4,6 +4,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home';
 import ProtectedRoutes from './util/ProtectedRoutes';
+import Form from './components/Form';
 
 export function App() {
   return (
@@ -12,7 +13,8 @@ export function App() {
         <Link to="/" className='text-decoration-none text-black hover:text-blue'>Home</Link>
         <div>
           <Link to="/login" className='text-decoration-none text-black hover:text-blue'>Login</Link> |{' '}
-          <Link to="/register" className='text-decoration-none text-black hover:text-blue'>Register</Link>
+          <Link to="/register" className='text-decoration-none text-black hover:text-blue'>Register</Link> | {' '}
+          <Link to="/form" className='text-decoration-none text-black hover:text-blue'>Filter form</Link>
         </div>
       </nav>
 
@@ -20,6 +22,7 @@ export function App() {
         <Route element={<ProtectedRoutes />}>
           {/* Protected routes go here */}
           <Route path="/" index element={<Home />} />
+          <Route path="/form" element={<Form/>} />
         </Route>
         <Route path="/register" index element={<Register />} />
         <Route path="/login" element={<Login />} />
