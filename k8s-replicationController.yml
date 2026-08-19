@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: formik-rc
+  labels:
+    app: formik-app
+    tier: fronten-end
+spec:
+  template:  #below paste pod yaml file except apiVersiona and kind
+    
+    metadata:
+      name: formik-pod
+      labels:
+        app: formik-app
+        tier: frontend
+    spec:
+      containers:
+        - name: formik-container
+          image: react-formik-yup-web:latest
+          imagePullPolicy: Never  # This stops Kubernetes from attempting to pull from Docker Hub
+
+  replicas: 3 # number of pods to be created by the replication controller
