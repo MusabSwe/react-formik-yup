@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: # metadata for the ReplicaSet
+  name: formik-rs
+  labels:
+    name: formik-rs
+    tier: front-end
+spec:
+  template: # below paste pod yaml file except apiVersion and kind
+    metadata: # metadata for the pod template
+      name: formik-pod
+      labels:
+        app: formik-app
+        tier: front-end # should match the labels in the selector below
+    spec:
+      containers:
+        - name: formik-container
+          image: react-formik-yup-web:latest
+          imagePullPolicy: Never  # This stops Kubernetes from attempting to pull from Docker Hub
+  replicas: 3
+  selector: # used to identify the pods that belong to this ReplicaSet
+    matchLabels:
+      app: formik-app
+      tier: front-end # should match the labels in the pod template metadata

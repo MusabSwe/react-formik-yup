@@ -4,7 +4,7 @@ metadata:
   name: formik-pod
   labels:
     app: formik-app
-    tier: frontend
+    tier: front-end
 spec:
   containers:
     - name: formik-container
