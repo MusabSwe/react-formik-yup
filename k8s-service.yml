@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: formik-service
+
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 5173
+      port: 5173
+      nodePort: 30008 # range 30000 - 32767
+  selector: # below add labels of pods that will the service target
+    app: formik-app # it is the metadata in the pod
+    tier: front-end # it is the metadata in the pod

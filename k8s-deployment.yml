@@ -18,5 +18,5 @@ spec:
         containers:
           - name: formik-container
             image: react-formik-yup-web:latest
-            imagePullPolicy: Never  # This stops Kubernetes from attempting to pull from Docker Hub
+            imagePullPolicy: IfNotPresent  # This stops Kubernetes from attempting to pull from Docker Hub
       
