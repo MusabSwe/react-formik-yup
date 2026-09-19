@@ -6,9 +6,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - targetPort: 5173
-      port: 5173
-      nodePort: 30008 # range 30000 - 32767
+    - targetPort: 5173 # pod Port
+      port: 5173 # servicePort
+      nodePort: 30008 # range 30000 - 32767, node port that host pods
   selector: # below add labels of pods that will the service target
     app: formik-app # it is the metadata in the pod
     tier: front-end # it is the metadata in the pod

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: formik-cluster-ip-service # should name be a lower case
+
+spec:
+  type: ClusterIP # it is the default type, if not specify by default will be ClusterIP
+  ports:
+    - targetPort: 5173 # pod port, where the pod port exposed 
+      port: 5173 # service port, whenre the service exposed
+  selector: # paste pod labels block
+    app: formik-app
+    tier: front-end
+

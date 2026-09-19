@@ -1,0 +1,23 @@
+# LoadBalancer Services require an external load balancer in most Kubernetes
+# environments. Minikube does not provide a cloud load balancer by default.
+# With Minikube, use `minikube tunnel` to expose the LoadBalancer Service.
+# The Service also gets a NodePort automatically, which can be used to access
+# the service through a node port.
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: load-balancer-service
+
+spec:
+  type: LoadBalancer
+
+  ports:
+    - port: 5173 # service port
+      targetPort: 5173 # pod port where the run on the port
+      nodePort: 30007  # NodePort range: 30000-32767
+
+  selector:
+    app: formik-app
+    tier: front-end
